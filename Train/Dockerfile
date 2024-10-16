@@ -7,6 +7,6 @@ ADD . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --trusted-host pypi.pyhton.org -r requirements-train.txt
 # Define environment variable
-ENV MODEL_PATH /app/model.npy
+ENV MODEL_PATH=/app/model.npy
 # Run main-train.py when the container launches
 CMD ["python", "main-train.py"]
