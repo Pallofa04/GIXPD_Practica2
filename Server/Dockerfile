@@ -8,7 +8,5 @@ ADD . /app
 RUN pip install --trusted-host pypi.pyhton.org -r requirements-server.txt
 # Define environment variable
 ENV MODEL_PATH=/app/model.npy
-# Export port 8000, as it's where Flask's listening
-EXPOSE 8000
 # Run main-server.py when the container launches
-CMD ["python", "main-server.py"]
+CMD ["flask", "--app", "main-server.py", "run", "--host=0.0.0.0"]
