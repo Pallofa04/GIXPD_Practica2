@@ -8,6 +8,5 @@ ADD . /app
 RUN pip install --trusted-host pypi.pyhton.org -r requirements-server.txt
 # Define environment variable
 ENV MODEL_PATH=/app/model.npy
-ENV FLASK_APP=main_server
 # Run main-server.py when the container launches
 CMD ["flask", "--app", "main-server.py", "run", "--host=0.0.0.0"]
