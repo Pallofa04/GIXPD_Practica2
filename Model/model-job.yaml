@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: model-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: model-container
+        image: model-train:default  # Cambia esto al nombre de tu imagen de entrenamiento
+        env:
+        - name: MODEL_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: model-configmap
+              key: MODEL_PATH
+        volumeMounts:
+        - name: model-volume
+          mountPath: /app/models  # Ruta dentro del contenedor donde se montará el volum
+        resources:
+          requests:
+            memory: "512Mi"  # Solicitudes de recursos
+            cpu: "500m"
+          limits:
+            memory: "1Gi"  # Límites de recursos
+            cpu: "1"
+      restartPolicy: Never  # No reiniciar el pod al finalizar
+      volumes:
+      - name: model-volume
+        emptyDir: {}  # Puedes cambiar esto a otro tipo de volum según necesites
