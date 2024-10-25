@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: model-configmap
-data:
-  MODEL_PATH: "/app/model.npy"
-  DEPLOYMENT_PATH: "/deployments/models"
