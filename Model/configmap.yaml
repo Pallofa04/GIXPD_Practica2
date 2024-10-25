@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: my-config
 data:
-  MODEL_PATH: "/app.py/model.npy"
+  MODEL_PATH: "/app/model.npy"
