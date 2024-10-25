@@ -1,0 +1,34 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: model-train-job
+spec:
+  template:
+    metadata:
+      name: model-train-job-pod
+    spec:
+      containers:
+        - name: model-train
+          image: model-train:default
+          command: ["python"]
+          args: ["main-train.py"]
+          envFrom:
+           - configMapRef:
+              name: my-config
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "128Mi"
+            requests:
+              cpu: "250m"
+              memory: "64Mi"
+          volumeMounts:
+            - name: model-data
+              mountPath: "/app"
+      volumes:
+        - name: model-data
+          hostPath:
+            path: "/tmp"
+      restartPolicy: Never
+  backoffLimit: 4
+
