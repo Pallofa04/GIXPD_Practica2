@@ -1,0 +1,12 @@
+# Dockerfile: Use an official Python runtime as a parent image
+FROM python:3.9-slim
+# Set the working directory to /app
+WORKDIR /app2
+# Copy the current directory contents into the container at /app
+ADD . /app2
+# Install any needed packages specified in requirements.txt
+RUN pip install --trusted-host pypi.pyhton.org -r requirements-train2.txt
+# Define environment variable
+ENV MODEL_PATH=/app2/model.npy
+# Run main-server.py when the container launches
+CMD ["python", "main-train2.py"]
